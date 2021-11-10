@@ -1,7 +1,7 @@
 {
   "name": "aws-res-api-sls",
   "version": "1.0.0",
-  "description": "A aws serverless application for CRUD the employees of a company.",
+  "description": "An aws serverless application for CRUD the employees of a company.",
   "scripts": {
     "serve": "serverless offline start",
     "install:db": "serverless dynamodb install",
