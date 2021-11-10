@@ -1,0 +1,165 @@
+swagger: "2.0"
+info:
+  description: "This is the Serverless Framework Node Rest API on AWS documentation."
+  version: "1.0.0"
+  title: "Serverless Framework Node Rest API on AWS"
+  contact:
+    email: "alef_berg@hotmail.com.br"
+  license:
+    name: "ISC License (ISC)"
+    url: "https://www.isc.org/licenses/"
+host: "xxx.execute-api.us-east-1.amazonaws.com"
+basePath: "/"
+schemes:
+- "https"
+- "http"
+paths:
+  /employee:
+    post:
+      tags:
+        - employee
+      summary: "Add a new employee"
+      operationId: "addEmployee"
+      consumes:
+        - "application/json"
+      produces: 
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Employee object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Employee"
+      responses:
+        "200":
+          description: "Successful operation"
+        "400":
+          description: "Invalid input"
+        "404":
+          description: "Not found"
+        "500":
+          description: "Internal server error"
+    get:
+      tags:
+        - "employee"
+      summary: "List all employees"
+      operationId: "listEmployees"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Success operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EmployeeWithId"
+        "404":
+          description: "Not found"
+        "500":
+          description: "Internal server error"
+  
+  /employee/{id}:
+    get:
+      tags:
+        - "employee"
+      summary: "Get employee by id"
+      operationId: "readEmployee"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "string"
+          format: "uuidv4"
+          required: true
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/EmployeeWithId"
+        "404":
+          description: "Not found"
+        "500":
+          description: "Internal server error"
+    put:
+      tags:
+        - "employee"
+      summary: "Update employee by id"
+      operationId: "updateEmployee"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "string"
+          format: "uuidv4"
+          required: true
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/EmployeeWithId"
+        "400":
+          description: "Invalid input"
+        "404":
+          description: "Not found"
+        "500":
+          description: "Internal server error"
+    delete:
+      tags:
+        - "employee"
+      summary: "Delete employee by id"
+      operationId: "deleteEmployee"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "string"
+          format: "uuidv4"
+          required: true
+      responses:
+        "200":
+          description: "Successful operation"
+        "404":
+          description: "Not found"
+        "500":
+          description: "Internal server error"
+definitions:
+  Employee:
+    type: "object"
+    required:
+      - "name"
+      - "age"
+      - "role"
+    properties:
+      name:
+        type: "string"
+        description: "The employee's name"
+        example: "Josh"
+      age:
+        type: "string"
+        description: "The employee's age"
+        example: "45"
+      role:
+        type: "string"
+        format: "Developer|Manager"
+        description: "The employee's role"
+        example: "Developer"
+  EmployeeWithId:
+    type: "object"
+    required:
+      - "id"
+    allOf:
+      - $ref: "#/definitions/Employee"
+    properties:
+      id:
+        type: "string"
+        format: "uuidv4"
+        description: "The employee's uuid"
+        example: "4e184a58-1de3-4dd4-89a2-ef1ff3c63ea5"
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
