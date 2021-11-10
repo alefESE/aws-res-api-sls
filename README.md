@@ -1,5 +1,7 @@
 # Serverless Framework Node Rest API on AWS
 
+## Objective
+
 This project demonstrates how to provide a AWS infrastructure, using clean architecture, serverless framework, AWS lambda functions and dynamoDB.
 
 ## Clean Architecture
@@ -26,7 +28,13 @@ npm run serve (run service locally)
 npm run migrate:db (migrate dynamodb)
 ```
 
-note: the migrate command must be executed while services are runing locally.
+_note: the migrate command must be executed while services are runing locally._
+
+### Run
+
+```
+npm run serve
+```
 
 ### Deploy
 
@@ -55,105 +63,15 @@ and edit serverless.yml provider.profile and provider.region
 npm run test
 ```
 
+## Documentation
 
-## Invocation
+The functions documentation can be found [here](https://alefese.github.io/aws-res-api-sls/).
 
-After successful deployment or local serve, you can access the service from http requests.
+## Frameworks and libraries
 
-### List employees
-
-#### Request
-
-```bash
-curl -X GET '<url>/users'
-```
-
-#### Response
-
-```bash
-[{
-  "id": "uuidv4",
-  "name": "string",
-  "age": "string",
-  "role": "Developer|Manager"
-}]
-```
-
-### Create employee
-
-#### Request
-
-```bash
-curl -X POST '<url>/employees' -H 'Content-Type: application/json'
--d '{
-    "age": "string",
-    "name": "string",
-    "role": "Developer|Manager"
-}'
-```
-
-#### Response
-
-```bash
-{
-  "id": "uuidv4",
-  "name": "string",
-  "age": "string",
-  "role": "Developer|Manager"
-}
-```
-
-### Read employee
-
-#### Request
-
-```bash
-curl -X GET '<url>/employees/{uuidv4}'
-```
-#### Response
-
-```bash
-{
-  "id": "uuidv4",
-  "name": "string",
-  "age": "string",
-  "role": "Developer|Manager"
-}
-```
-
-### Update employee
-
-#### Request
-
-```bash
-curl -X PUT '<url>/employees/{uuidv4}' -H 'Content-Type: application/json'
--d '{
-    "name": "string",
-    "age": "string",
-    "role": "Developer|Manager"
-}'
-```
-#### Response
-
-```bash
-{
-  "id": "uuidv4",
-  "name": "string",
-  "age": "string",
-  "role": "Developer|Manager"
-}
-```
-
-### Delete employee
-
-#### Request
-
-```bash
-curl -X DELETE '<url>/employees/{uuidv4}'
-```
-
-#### Response
-
-```bash
-Success.
-```
+- Serverless Framework
+- NodeJS 14+
+- Typescript
+- AWS Lambda Functions
+- DynamoDB
+- Jest
