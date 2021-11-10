@@ -12,7 +12,6 @@ host: "xxx.execute-api.us-east-1.amazonaws.com"
 basePath: "/"
 schemes:
 - "https"
-- "http"
 paths:
   /employee:
     post:
@@ -159,7 +158,3 @@ definitions:
         format: "uuidv4"
         description: "The employee's uuid"
         example: "4e184a58-1de3-4dd4-89a2-ef1ff3c63ea5"
-
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
