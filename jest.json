@@ -1,0 +1,33 @@
+{
+    "moduleFileExtensions": [
+        "ts",
+        "js"
+    ],
+    "rootDir": ".",
+    "verbose": true,
+    "testEnvironment": "node",
+    "testRegex": "./test/.*.spec.ts$",
+    "coverageReporters": [
+        "json-summary",
+        "text",
+        "lcov"
+    ],
+    "coverageDirectory": ".coverage",
+    "collectCoverageFrom": [
+        "src/**/*.ts"
+    ],
+    "transform": {
+        "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "moduleNameMapper": {
+        "@core/(.*)$": "<rootDir>/src/core/$1",
+        "@infra/(.*)$": "<rootDir>/src/infra/$1",
+        "@app/(.*)$": "<rootDir>/src/app/$1",
+        "@test/(.*)$": "<rootDir>/test/$1"
+    },
+    "reporters": [
+        "default",
+        "jest-junit"
+    ],
+    "testResultsProcessor": "jest-sonar-reporter"
+}

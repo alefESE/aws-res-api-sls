@@ -1,0 +1,63 @@
+service: aws-res-api-sls
+frameworkVersion: '2'
+
+plugins:
+  - serverless-esbuild
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  tableName: 'employees-table-${sls:stage}'
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    exclude: ['aws-sdk']
+    target: 'node14'
+    define: { 'require.resolve': undefined }
+    platform: 'node'
+    concurrency: 10
+  
+  serverless-offline:
+    httpPort: 3000
+
+  dynamodb:
+    stages:
+      - ${self:provider.stage}
+    port: 8000
+    migrate: true
+    
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  lambdaHashingVersion: '20201221'
+  profile: alefese # AWS CLI profile name
+  region: us-east-1
+  environment:
+    EMPLOYEES_TABLE: ${self:custom.tableName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query"
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - Fn::GetAtt: [ EmployeesTable, Arn ]
+
+functions:
+  # Lambda-functions
+  ${file(res/employees-lambda-functions.yml)}
+
+resources:
+  # DynamoDB
+  ${file(res/dynamodb-table.yml)}
+
+package:
+  exclude:
+    - node_modules/dynamodb-localhost/**
+    - node_modules/serverless-dynamodb-local/**
+    - node_modules/serverless-offline/**

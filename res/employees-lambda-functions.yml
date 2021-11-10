@@ -1,0 +1,36 @@
+list:
+  handler: src/app/webserver/controller/employees/list.handler
+  timeout: 10
+  events:
+    - httpApi:
+        path: /employees
+        method: get
+      
+create:
+  handler: src/app/webserver/controller/employees/create.handler
+  timeout: 10
+  events:
+    - httpApi:
+        path: /employees
+        method: post
+read:
+  handler: src/app/webserver/controller/employees/read.handler
+  timeout: 10
+  events:
+    - httpApi:
+        path: /employees/{id}
+        method: get
+update:
+  handler: src/app/webserver/controller/employees/update.handler
+  timeout: 10
+  events:
+    - httpApi:
+        path: /employees/{id}
+        method: put
+delete:
+  handler: src/app/webserver/controller/employees/delete.handler
+  timeout: 10
+  events:
+    - httpApi:
+        path: /employees/{id}
+        method: delete
