@@ -75,3 +75,18 @@ The functions documentation can be found [here](https://alefese.github.io/aws-re
 - AWS Lambda Functions
 - DynamoDB
 - Jest
+
+## Use cases implemented
+
+- [x] Create Employee
+- [x] Read Employee
+- [x] Update Employee
+- [x] Delete Employee
+- [x] List Employees
+- [ ] Query Employees
+
+## Considerations
+
+- It's necessary to improve and implement Unit Tests and Integration Tests.
+- It's necessary to improve and implement exceptions treatment.
+- Although the REST calls can be performed with the services running locally, it seems reasonable that it is possible to perform tests through mockups in the documentation provided by the Swagger UI, in the "Try it out" section.
